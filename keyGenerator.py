@@ -4,7 +4,7 @@ import os
 from random import choice
 def keys(amount, key_len):
 	totalKeys = ""
-	r = string.ascii_letters + string.digits
+	r = '10'
 	for a in range(amount):
 		kl = ""
 		for k in range(key_len):

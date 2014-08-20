@@ -1,37 +1,38 @@
 import binascii
-msg = raw_input("Type your message to encrypt: ")
-#10001
 
-f=open("keys/key.txt","r")
-txt = f.readline()
-txt = txt.strip()
-f.close()
-bina =  bin(int(binascii.hexlify(msg), 16))
-bina = bina[2:]
-# print bina 
+def readLine():
+	f=open("keys/key.txt","r")
+	key = f.readline()
+	key = key.strip()
+	f.close()
+	global bina
+	bina =  bin(int(binascii.hexlify(key), 16))
+	bina = bina[2:]
+	return key
 
-cipher = ""
+def crypt(key):
+	i = 0
+	crypt_message = ''
+	for letter in bina:
+		k = int((key[i%len(key)]))
+		crypt_message += str(int(letter) ^ k)
+	 	i += 1
+	return crypt_message
 
-val= int(bina,2)^int(txt,2)
-cipher = bin(val)
-# print cipher[2:]
+def decrypt(crypt_message,key):
+	j = 0
+	plain_message = ""
+	for c in crypt_message:
+		p = int((key[j%len(key)]))
+		plain_message += str(int(c) ^ p)
+		j += 1	
+	return plain_message
 
-n = int(bina, 2)
-o = int(cipher,2)
-# print binascii.unhexlify('%x' % n)
-# print binascii.unhexlify('%x' % o) 
-new_cipher = ""
-#for r in range(1,len(msg)+1):
-a = 0
-b = 0
-print str(len(msg)) + " " + str(len(txt))
-while len(msg) != len(txt):
-	(a,b) = (max(a,b),min(a,b))
-	print type(a)
-	print type(b)
+a = readLine()	
+c = crypt(a)
+p = decrypt(c,a)
 
-	print type(val)
-
-	new_cipher += txt*val
-	print new_cipher
-print "wii"	 
+print bina
+print c + "encript"
+print p + 'decrypt'
+print a*8

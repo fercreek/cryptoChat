@@ -5,15 +5,15 @@ def readLine():
 	key = f.readline()
 	key = key.strip()
 	f.close()
-	global bina
-	bina =  bin(int(binascii.hexlify(key), 16))
-	bina = bina[2:]
+	# global bina
+	# bina =  bin(int(binascii.hexlify(key), 16))
+	# bina = bina[2:]
 	return key
 
 def crypt(key):
 	i = 0
 	crypt_message = ''
-	for letter in bina:
+	for letter in msg:
 		k = int((key[i%len(key)]))
 		crypt_message += str(int(letter) ^ k)
 	 	i += 1
@@ -28,11 +28,15 @@ def decrypt(crypt_message,key):
 		j += 1	
 	return plain_message
 
+
+msg = 'hola'
+msg = bin(int(binascii.hexlify(msg), 16))
+msg = msg[2:]
 a = readLine()	
 c = crypt(a)
 p = decrypt(c,a)
 
-print bina
-print c + "encript"
-print p + 'decrypt'
-print a*8
+change = int(c)
+n = int('110100001100101011011000110110001101111', 2)
+print type(change)
+print binascii.unhexlify('%x' % int(change)

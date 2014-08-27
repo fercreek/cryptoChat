@@ -20,8 +20,10 @@ a = keys(amount, key_len)
 if not os.path.exists('keys'):
     os.makedirs('keys')
 
-f=open("keys/key.txt","w")
+f=open("keys/keyA.txt","w")
 f.write(a)
 f.close()
-
+f=open("keys/keyB.txt","w")
+f.write(a)
+f.close()
 

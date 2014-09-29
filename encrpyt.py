@@ -39,4 +39,4 @@ a = readKey()
 
 writeText(crypt(a))
 eraseKey()
-print "Encryption sucess"
+print "Encryption success"

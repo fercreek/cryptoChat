@@ -1,8 +1,11 @@
 #!/usr/bin/python
 import string
 import os
+import sys
 from random import choice
+
 def keys(amount, key_len):
+	(amount,key_len) = (int(amount),int(key_len)) 
 	totalKeys = ""
 	r = '10'
 	for a in range(amount):
@@ -12,18 +15,30 @@ def keys(amount, key_len):
 		totalKeys += kl + '\n'
 	return totalKeys
 
-amount = input("Type the amount of keys: ")
-key_len = input("Type the length of the key: ")
+def writing(key):
+	f=open("keys/keyA.txt","w")
+	f.write(key)
+	f.close()
+	f=open("keys/keyB.txt","w")
+	f.write(key)
+	f.close()
 
-a = keys(amount, key_len)
+try:
+	key = keys(sys.argv[1],sys.argv[2])
+except: 
+	print "Intenta de nuevo"	
+	sys.exit(0)
+
+try:
+	writing(key)
+except:		
+	print "Intenta de nuevo"
+	sys.exit(0)
+else:	
+	print "Numeros Generados"
 
 if not os.path.exists('keys'):
     os.makedirs('keys')
 
-f=open("keys/keyA.txt","w")
-f.write(a)
-f.close()
-f=open("keys/keyB.txt","w")
-f.write(a)
-f.close()
+
 
